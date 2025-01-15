@@ -1,3 +1,7 @@
+// 我是不是忘了说它被遗弃了
+// 应该是...
+// -- AImixAE 2025/1/15 21:17
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

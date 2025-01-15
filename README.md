@@ -21,11 +21,11 @@ xmake b
 -   `libshared_`: 动态文件
 -   `libstatic_`: 静态文件
 
-## 在虚拟机上运行
+## 在虚拟机中运行
 
 请确保你有 `qemu` 等虚拟机平台
 
-我们需要一个 [linux内核(bzImage)](https://kernel.org) 并且复制到 `workspaces` 文件夹
+我们需要一个 [linux 内核(bzImage)](https://kernel.org) 并且复制到 `workspaces` 文件夹
 
 进入 `workspaces` 文件夹, 输入以下命令
 
@@ -35,6 +35,10 @@ make
 ```
 
 然后, 你就可以运行了
+
 ```bash
 make run
 ```
+
+简略说明，详细在这里 👉 [RunOnVM](doc/RunOnVM.md)
+
