@@ -18,8 +18,8 @@ xmake b
 -   `static_binary_*`: 静态二进制简单工具
 -   `shared_*`: 动态二进制程序
 -   `static_*`: 静态二进制程序
--   `libshared_`: 动态文件
--   `libstatic_`: 静态文件
+-   `libshared_*.so`: 动态文件
+-   `libstatic_*.a`: 静态文件
 
 ## 在虚拟机中运行
 
