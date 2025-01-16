@@ -3,15 +3,20 @@
 #include <string.h>
 #include <unistd.h>
 
+// readline
+#include <readline/history.h>
+#include <readline/readline.h>
+
 #include "color.h"
-#include "token.h"
 #include "exec.h"
+#include "token.h"
 #include "user.h"
 
 char *mysh_read_line() {
-    char *line = NULL;
-    size_t bufsize;
-    getline(&line, &bufsize, stdin);
+    char *line = readline(GREEN "==> " RESET);
+    if (line && *line) {
+        add_history(line);
+    }
     return line;
 }
 
@@ -42,9 +47,8 @@ void mysh_loop() {
         getcwd(path, 100);
 
         // shell前缀
-        printf(GREEN "[ " YELLOW "mysh " MAGENTA "( %s )" RESET GREEN "]\n",
+        printf(GREEN "[ " YELLOW "mysh " MAGENTA "( %s )" RESET GREEN "]\n" RESET,
                path);
-        printf("==> " RESET);
 
         line = mysh_read_line();       // 读取命令
         args = mysh_split_line(line);  // 分词
