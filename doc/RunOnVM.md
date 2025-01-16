@@ -16,31 +16,31 @@ make -j$(nproc)
 随后复制到 `workspaces` 文件夹 _(往后再改名)_
 
 ```bash
-cp /path/to/bzImage workspace/bzImage
+cp /path/to/your/bzImage workspace/bzImage
 ```
 
 记得先使用 `xmake` 编译
 
 我们需要以下文件
 
--   `build/linux/x86_64/release/static_main`
--   `build/linux/x86_64/release/static_binary_ls`
--   `build/linux/x86_64/release/static_binary_echo`
+-   `build/main`
+-   `build/lib*.so`
 
 ```bash
-xmake b
+cmake -G Ninja -B build
+cd build
+ninja
 ```
 
 进入 `workspaces` 文件夹, 输入以下命令
 
 ```bash
-make copy
-make
+./build all
 ```
 
 编译成功后, 你就可以运行了
 
 ```bash
-make run
+./build run
 ```
 
