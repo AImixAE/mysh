@@ -13,7 +13,7 @@ make menuconfig
 make -j$(nproc)
 ```
 
-随后复制到 `workspaces` 文件夹 _(往后再改名)_
+随后复制到 `cpio` 文件夹 _(往后再改名)_
 
 ```bash
 cp /path/to/your/bzImage workspace/bzImage
@@ -32,7 +32,7 @@ cd build
 ninja
 ```
 
-进入 `workspaces` 文件夹, 输入以下命令
+进入 `cpio` 文件夹, 输入以下命令
 
 ```bash
 ./build all

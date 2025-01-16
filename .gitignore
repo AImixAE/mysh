@@ -1,5 +1,5 @@
 build
 
-workspaces/bzImage
-workspaces/mysh.cpio
-workspaces/initfs
+cpio/bzImage
+cpio/mysh.cpio
+cpio/initfs

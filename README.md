@@ -23,9 +23,9 @@ ninja
 
 请确保你有 `qemu` 等虚拟机平台
 
-我们需要一个 [linux 内核(bzImage)](https://kernel.org) 并且复制到 `workspaces` 文件夹
+我们需要一个 [linux 内核(bzImage)](https://kernel.org) 并且复制到 `cpio` 文件夹
 
-进入 `workspaces` 文件夹, 输入以下命令
+进入 `cpio` 文件夹, 输入以下命令
 
 ```bash
 ./build all
