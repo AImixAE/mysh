@@ -54,9 +54,6 @@ int mysh_history(char **args) {
     return 1;
 }
 
-// 还无法运行
-// 有空再修吧
-
 int mysh_set(char **args) {
     // 检查 args 数组的有效性
     if (args[1] == NULL || args[2] == NULL) {
@@ -91,7 +88,7 @@ int mysh_get(char **args) {
         return 1;
     }
 
-    printf("%s = %s\n", args[1], getenv(args[0]));
+    printf("%s = %s\n", args[1], getenv(args[1]));
 
     return 1;
 }
