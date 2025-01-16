@@ -1,70 +1,74 @@
 #!/bin/bash
 
-main () {
+main() {
     case "$1" in
-        all)
-            $0 initfs
-            $0 initfs_link
-            $0 copy
-            $0 copy_link
-            $0 copy_tools
-            $0 copy_lib
-            $0 chrpath
-            $0 mkcpio
+    all)
+        $0 initfs
+        $0 initfs-link
+        $0 copy
+        $0 copy-link
+        $0 copy-tools
+        $0 copy-lib
+        $0 chrpath
+        $0 mkcpio
 
-            echo "All Done!"
-            ;;
+        echo "All Done!"
+        ;;
 
-        initfs)
-            mkdir -p initfs
-            mkdir -p initfs/{bin,usr/lib}
-            ;;
+    initfs)
+        mkdir -p initfs
+        mkdir -p initfs/usr/{bin,lib}
+        ;;
 
-        initfs_link)
-            (cd initfs && (cd usr && ln -s lib lib64) && ln -s usr/lib lib && ln -s usr/lib64 lib64)
-            ;;
+    initfs-link)
+        (cd initfs && (cd usr && ln -s lib lib64) && ln -s usr/lib lib && ln -s usr/lib64 lib64 && ln -s usr/bin bin)
+        ;;
 
-        copy)
-            cp ../build/main initfs/init
-            cp ../build/lib*.so initfs/usr/lib    
-            ;;
+    copy)
+        cp ../build/main initfs/init
+        cp ../build/lib*.so initfs/usr/lib
+        ;;
 
-        copy_tools)
-            cp /bin/ls /bin/echo initfs/bin
-            ;;
+    copy-tools)
+        cp /bin/ls /bin/echo /bin/bash /bin/mkdir /bin/cat /bin/rm /bin/cp /bin/touch /bin/mv initfs/usr/bin
+        ;;
 
-        copy_lib)
-            cp /usr/lib/libreadline.so.8 /usr/lib/libcap.so.2 /usr/lib/libc.so.6 /usr/lib/libncursesw.so.6 /usr/lib64/ld-linux-x86-64.so.2 initfs/usr/lib
-            ;;
+    copy-lib)
+        cp /usr/lib/libreadline.so.8 /usr/lib/libattr.so.1 /usr/lib/libacl.so.1 /usr/lib/libcap.so.2 /usr/lib/libc.so.6 /usr/lib/libncursesw.so.6 /usr/lib64/ld-linux-x86-64.so.2 initfs/usr/lib
+        ;;
 
-        chrpath)
-            (cd initfs && chrpath -r ./usr/lib init && ldd init)
-            echo "请在 initfs 下查看 init"
-            ;;
+    chrpath)
+        (cd initfs && chrpath -r ./usr/lib init && ldd init)
+        echo "请在 initfs 下查看 init"
+        ;;
 
-        seerpath)
-            (cd initfs && ldd init)
-            ;;
+    seerpath)
+        (cd initfs && ldd init)
+        ;;
 
-        mkcpio)
-            (cd initfs && find . -print | cpio -ov -H newc) > mysh.cpio
-            ;;
+    mkcpio)
+        (cd initfs && find . -print | cpio -ov -H newc) >mysh.cpio
+        ;;
 
-        seecpio)
-            cpio -itv < mysh.cpio
-            ;;
+    seecpio)
+        cpio -itv <mysh.cpio
+        ;;
 
-        clean)
-            rm -rf initfs
-            rm -f mysh.cpio
-            ;;
+    clean)
+        rm -f mysh.cpio
+        ;;
 
-        run)
-            qemu-system-x86_64 \
-                -kernel ./bzImage \
-                -initrd ./mysh.cpio \
-                -append "root=/dev/rom rw"
-            ;;
+    clean-all)
+        rm -rf initfs
+        rm -f mysh.cpio
+        ;;
+
+    run)
+        qemu-system-x86_64 \
+            -kernel ./bzImage \
+            -initrd ./mysh.cpio \
+            -append "root=/dev/rom rw"
+        ;;
     esac
 }
 
