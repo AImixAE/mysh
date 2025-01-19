@@ -6,20 +6,9 @@ all: initfs initfs/init copy_lib copy_syslib copy_tools copy_tools_lib chrpath m
 mysh.cpio: initfs initfs/init
 	(cd $< && find . -print | cpio -ov -H newc) > mysh.cpio
 
-bzImage: linux-6.12.9.tar.xz linux
-	@read -p "编译内核?(按 Ctrl+c 退出)" _
-	cd linux; make defconfig; make -j$(nproc)
-
-linux:
-	@read -p "解压内核?(按 Ctrl+c 退出)" _
-	@echo "解压文件... 稍作等待"
-	tar -xf linux-6.12.9.tar.xz
-	mv linux-6.12.9 linux
-
-linux-6.12.9.tar.xz:
-	@read -p "下载内核?(按 Ctrl+c 退出)" _
+linux.tar.xz:
 	@echo "Downloading kernel..."
-	aria2c https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.9.tar.xz
+	aria2c -o linux.tar.xz https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.12.10.tar.xz
 
 initfs:
 	mkdir -p initfs
@@ -54,7 +43,7 @@ seerpath: initfs/init
 	cd initfs; ldd init
 
 run: mysh.cpio
-	@if [[ ! -f bzImage ]]; then echo -e "警告! 内核不存在\n可以通过 make bzImage 自动编译"; exit 1; fi
+	@if [[ ! -f bzImage ]]; then echo -e "警告! 内核不存在"; exit 1; fi
 	qemu-system-x86_64 \
 		-kernel ./bzImage \
 		-initrd ./mysh.cpio \

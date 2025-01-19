@@ -3,4 +3,4 @@ build
 cpio/bzImage
 cpio/mysh.cpio
 cpio/initfs
-**/linux*
+cpio/linux*
