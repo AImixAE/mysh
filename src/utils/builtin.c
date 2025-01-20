@@ -6,12 +6,13 @@
 
 #include "builtin.h"
 #include "color.h"
-#include "defines.h"
+#include "vars.h"
 
 char *builtin_cmd[] = {"cd", "help", "exit", "history", "ver", "set", "get"};
 
 int (*builtin_func[])(char **) = {&mysh_cd,      &mysh_help, &mysh_exit,
-                                  &mysh_history, &mysh_ver, &mysh_set,  &mysh_get};
+                                  &mysh_history, &mysh_ver,  &mysh_set,
+                                  &mysh_get};
 
 int mysh_builtin_nums() { return sizeof(builtin_cmd) / sizeof(builtin_cmd[0]); }
 
@@ -54,7 +55,7 @@ int mysh_history(char **args) {
 }
 
 int mysh_ver(char **args) {
-    printf(GREEN "My Shell " BLUE "Version " CYAN mysh_ver RESET "\n");
+    printf(GREEN "My Shell " BLUE "Version " CYAN "%s" RESET "\n", MYSH_VER);
 
     return 1;
 }
