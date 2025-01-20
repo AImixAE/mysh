@@ -6,7 +6,7 @@
 
 #include "builtin.h"
 #include "color.h"
-#include "vars.h"
+#include "version.h"
 
 char *builtin_cmd[] = {"cd", "help", "exit", "history", "ver", "set", "get"};
 
@@ -55,7 +55,8 @@ int mysh_history(char **args) {
 }
 
 int mysh_ver(char **args) {
-    printf(GREEN "My Shell " BLUE "Version " CYAN "%s" RESET "\n", MYSH_VER);
+    printf(GREEN "My Shell " BLUE "Version " CYAN "%s" RESET "\n",
+           mysh_get_version());
 
     return 1;
 }
