@@ -1,4 +1,5 @@
-build
+/build
+/.cache
 
 cpio/bzImage
 cpio/mysh.cpio
