@@ -35,22 +35,21 @@ char **mysh_split_line(char *line) {
 }
 
 void mysh_loop() {
-    char *line;   // 输入命令
-    char **args;  // 存储参数
-    int status;   // 命令状态
+    char *line;
+    char **args;
+    int status;
 
     do {
-        // 获取当前位置
         char path[100];
         getcwd(path, 100);
 
-        // shell前缀
-        printf(GREEN "[ " YELLOW "mysh " MAGENTA "( %s )" RESET GREEN "]\n" RESET,
+        printf(GREEN "[ " YELLOW "mysh " MAGENTA "( %s )" RESET GREEN
+                     "]\n" RESET,
                path);
 
-        line = mysh_read_line();       // 读取命令
-        args = mysh_split_line(line);  // 分词
-        status = mysh_execute(args);   // 执行命令 获取返回值
+        line = mysh_read_line();
+        args = mysh_split_line(line);
+        status = mysh_execute(args);
 
         free(line);
         free(args);

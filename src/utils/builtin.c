@@ -41,7 +41,6 @@ int mysh_help(char **args) {
 int mysh_exit(char **args) { return 0; }
 
 int mysh_history(char **args) {
-    // 输出历史
     int len = history_length;
 
     for (int i = 0; i < len; i++) {
@@ -62,13 +61,11 @@ int mysh_ver(char **args) {
 }
 
 int mysh_set(char **args) {
-    // 检查 args 数组的有效性
     if (args[1] == NULL || args[2] == NULL) {
         puts("set: need 2 valid arguments");
         return 1;
     }
 
-    // 检查环境变量名是否合法
     char *var_name = args[1];
     if (*var_name == '\0' || *var_name >= '0' && *var_name <= '9') {
         puts("set: invalid environment variable name");
@@ -81,7 +78,6 @@ int mysh_set(char **args) {
         }
     }
 
-    // 调用 setenv 并检查返回值
     if (setenv(args[1], args[2], 1) != 0) {
         perror("set");
     }
